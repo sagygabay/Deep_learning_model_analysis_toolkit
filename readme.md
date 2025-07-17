@@ -1,9 +1,9 @@
-##Deep Learning Model Analysis Toolkit##
+# Deep Learning Model Analysis Toolkit
 
 A complete, interactive command-line application designed to analyze, visualize, and correct the predictions of a binary classification model built with PyTorch and timm.
 This toolkit provides a seamless workflow from initial performance assessment to hands-on data cleaning, helping you understand your model's failures and improve your dataset's quality.
 
-Features
+## Features
 ✅ Comprehensive Analysis: Processes a test dataset and generates a detailed CSV report containing image paths, true vs. predicted labels, confidence scores, and per-image log loss.
 ✅ Performance Metrics: Automatically calculates and displays a final summary including F1 Score, Accuracy, Precision, Recall, and a full Confusion Matrix.
 ✅ Data Visualization: Generates a set of publication-ready plots from the analysis report, including:
@@ -17,41 +17,34 @@ See the F1 Score and Accuracy update in real-time with every change.
 ✅ Persistent Logging: All label corrections made during an interactive session are saved to a change_log.txt file, providing a complete history of your work.
 ✅ Modular & Clean Code: The project is broken down into single-responsibility Python modules, making it easy to understand, maintain, and extend.
 ✅ User-Friendly Interface: The entire tool is controlled from a single main.py script with a simple, interactive menu.
-Project Structure
+## Project Structure
 Your project folder should be organized as follows for the tool to work correctly:
-Generated code
 your_project_folder/
-│
-├── your_model.pth                  # Your trained model checkpoint file
-│
+├── model_b3/best_model.pth         # Your trained model checkpoint file
 ├── main.py                         # The single, interactive entry point to the application
 ├── load_model.py                   # Module for loading the PyTorch model
 ├── prediction_utils.py             # Module for running a prediction on a single image
 ├── analysis_tasks.py               # Module for generating the CSV report and metrics
 ├── visualization_tasks.py          # Module for generating plots from the report
 ├── interactive_tasks.py            # Module for the interactive label fixer session
-│
 ├── output_visualizations/          # (Auto-created) Folder for saved plots
 │   ├── confusion_matrix.png
 │   └── ...
-│
-├── prediction_report_v2.csv        # (Auto-created) The main analysis report
-├── prediction_report_v2_corrected.csv # (Optional) Saved after an interactive session
+├── prediction_report.csv           # (Auto-created) The main analysis report
+├── prediction_report_corrected.csv # (Optional) Saved after an interactive session
 └── change_log.txt                  # (Optional) Saved after an interactive session
-Use code with caution.
-Setup and Installation
+## Setup and Installation
 Follow these steps to get the toolkit up and running.
 1. Get the Code:
 Place all the Python script files (main.py, load_model.py, etc.) into your project directory.
 2. Set up the Python Environment:
 This tool was developed using an Anaconda environment. It is recommended to use a virtual environment to keep dependencies clean.
 Install all required libraries using pip:
-Generated bash
+```bash
 pip install torch timm pandas scikit-learn matplotlib seaborn
-Use code with caution.
-Bash
+```
 3. Place Your Model:
-Make sure your trained model file (e.g., your_model.pth) is placed in the project directory or that the path to it is correct.
+Make sure your trained model file (e.g., model_b3/best_model.pth) is placed in the project directory or that the path to it is correct.
 4. Configure Paths in main.py:
 Open the main.py script and review the Master Configuration section at the top. Ensure the following paths are correct for your system:
 MODEL_PATH: The path to your trained model file.
@@ -59,23 +52,25 @@ TEST_DATA_DIR: The path to your test dataset folder (which should contain center
 Usage
 The entire toolkit is operated from the main.py script, which provides a user-friendly menu.
 To start the application, run:
-Generated bash
-python main.py```
+```bash
+python main.py
+```
 
 You will be presented with the following menu:
-Use code with caution.
-Bash
+```
 =====================================
-Model Analysis Interactive Menu
-Run Full Pipeline (Analyze + Visualize)
-Run Analysis Only (Generate CSV Report)
-Run Visualization Only (From existing CSV)
-Run Interactive Label Fixer
-Exit
+  Model Analysis Interactive Menu
+=====================================
+1. Run Full Pipeline (Analyze + Visualize)
+2. Run Analysis Only (Generate CSV Report)
+3. Run Visualization Only (From existing CSV)
+4. Run Interactive Label Fixer
+5. Exit
+-------------------------------------
 Please enter your choice (1-5):
-Generated code
+```
 - **Option 1:** The default workflow. It first runs the analysis to create the CSV report and then immediately generates all visualizations from that report.
-- **Option 2:** Use this if you only need the raw data. It will process all images and create the `prediction_report_v2.csv` file, then print the final F1/Accuracy summary.
+- **Option 2:** Use this if you only need the raw data. It will process all images and create the `prediction_report.csv` file, then print the final F1/Accuracy summary.
 - **Option 3:** Use this if you already have a report and just want to re-generate the plots without re-processing all the images.
 - **Option 4:** The data-cleaning tool. This starts the powerful interactive session to review and correct mislabeled images.
 - **Option 5:** Exits the application.
@@ -84,7 +79,7 @@ Generated code
 
 A typical use case for this toolkit would be:
 
-1.  **Run Initial Analysis:** Run the script and choose **Option 2** to get a baseline understanding of your model's performance and generate the first `prediction_report_v2.csv`.
+1.  **Run Initial Analysis:** Run the script and choose **Option 2** to get a baseline understanding of your model's performance and generate the first `prediction_report.csv`.
 2.  **Get a Visual Overview:** Run the script again and choose **Option 3**. Check the generated plots, especially the `confusion_matrix.png`, to see where the model is failing.
 3.  **Correct Mislabels:** After reviewing the plots, run the script and choose **Option 4**. The tool will guide you through the model's biggest mistakes. You can **Ctrl+Click** the image paths to view them and decide if the ground truth label is wrong.
 4.  **Save Corrections:** After the interactive session, save the new `_corrected.csv` report and the `change_log.txt`.
